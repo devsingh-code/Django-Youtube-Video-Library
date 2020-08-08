@@ -1,0 +1,9 @@
+{% extends 'corelib\base.html' %}
+
+{% block content %}
+  <div class="container">
+     <h2 class="pt-4 text-uppercase key_spacing title_font_color">{{ videolib.title }}</h2>
+     <hr>
+     <h4 class="text-muted">{{ videolib.user.username }}</h4>
+  </div>
+{% endblock content %}

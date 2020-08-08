@@ -1,0 +1,17 @@
+{% extends "corelib\base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <div class="container">
+      <h2 class="pt-4 text-uppercase key_spacing title_font_color">Delete Video Library</h2>
+      <hr>
+      <div>
+        <h3 class="pt-2 mt-2">Delete<a href="{% url 'detail_videolib' videolib.id %}"> {{ videolib.title }}</a>?</h3>
+      </div>
+    <form action="" method="POST" class="pt-2 mt-4 font-weight-bold">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button type="submit" class="btn btn-danger mt-4">Delete</button>
+    </form>
+    <br>   
+  </div>
+{% endblock content %}

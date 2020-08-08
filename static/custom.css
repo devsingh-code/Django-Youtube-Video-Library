@@ -10,6 +10,10 @@
   max-width: 51rem;
 }
 
-.home_icon{
-  color: rgb(106, 121, 255);
+.key_spacing{
+  letter-spacing: 1rem;
+}
+
+.title_font_color{
+  color: #8c28dd;
 }

@@ -9,3 +9,12 @@
 .jumbotron .container {
   max-width: 51rem;
 }
+
+.key_spacing{
+  letter-spacing: 0.2rem;
+}
+
+.title_font_color{
+  color: #741ebb;
+  
+}
