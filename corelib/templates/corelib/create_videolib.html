@@ -1,0 +1,11 @@
+{% extends "corelib\base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <div class="container">
+    <form action="" method="POST" class=" p-2 mt-4 font-weight-bold">
+        {% csrf_token %}
+        {{form|crispy}}
+        <input type="submit" value="Create Video Library" class="btn btn-warning mt-4">
+    </form>
+  </div>
+{% endblock content %}

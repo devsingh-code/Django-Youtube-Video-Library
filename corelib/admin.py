@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import CoreLib, Video
+from .models import VideoLib, Video
 
 
-admin.site.register(CoreLib)
+admin.site.register(VideoLib)
 admin.site.register(Video)
 # Register your models here.
