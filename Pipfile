@@ -11,6 +11,7 @@ crispy-forms = "*"
 django-crispy-forms = "*"
 django-widget-tweaks = "*"
 requests = "*"
+environ = "*"
 
 [requires]
 python_version = "3.7"
