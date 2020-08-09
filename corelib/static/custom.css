@@ -11,10 +11,14 @@
 }
 
 .key_spacing{
-  letter-spacing: 1px;
+  letter-spacing: 0.2px;
 }
 
 .title_font_color{
   color: #741ebb;
+  
+}
+.h3_text_color{
+  color: #35393b;
   
 }

@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import VideoLib, Video
 from django.contrib.auth import authenticate, login
 from .forms import VideoForm, SearchForm
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from  django.forms.utils import ErrorList
 import urllib, requests
 
@@ -40,9 +40,9 @@ def add_video(request, pk):
                 video.youtube_id= video_id[0]
                 response = requests.get(f'https://www.googleapis.com/youtube/v3/videos?part=snippet&id={ video_id[0] }&key={YOUTUBE_API_KEY}')
                 json = response.json()
-                print(json)
+                
                 title = json['items'][0]['snippet']['title']
-                print(title)
+                
                 video.title= title 
                 video.save()
                 return redirect('detail_videolib',pk)
@@ -52,6 +52,11 @@ def add_video(request, pk):
 
     return render(request, 'corelib/add_video.html',{'form':form, 'search_form':search_form, 'videolib':videolib})
 
+def video_search(request):
+    search_form = SearchForm(request.GET)
+    if search_form.is_valid():
+        return JsonResponse({'hello':search_form.cleaned_data['search_term']})
+    return JsonResponse({'hello':'Not working'})
 
 class SignUp(generic.CreateView):
     form_class = UserCreationForm
