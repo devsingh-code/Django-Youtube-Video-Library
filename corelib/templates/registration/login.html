@@ -6,7 +6,16 @@
        <hr/>
        <form class="border p-4 font-weight-bold" method="POST">
            {% csrf_token %}
-           {{form|crispy}}
+           {% load widget_tweaks %}
+
+           {% for field in form  %}
+           <div class="form-group {% if field.errors %} alert alert-danger {% endif %}">
+             {{field.errors}}
+             {{field.label_tag}}
+             {% render_field field class="form-control"%}
+           </div>  
+           
+           {% endfor %}
            <p class="pt-3"><button type="submit" class="btn btn-primary font-weight-bold">Login</button></p>
            
        </form>

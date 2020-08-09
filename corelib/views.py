@@ -2,11 +2,16 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.forms import UserCreationForm
-from .models import VideoLib
+from .models import VideoLib, Video
 from django.contrib.auth import authenticate, login
-from .forms import VideoForm
+from .forms import VideoForm, SearchForm
+from django.http import Http404
+from  django.forms.utils import ErrorList
+import urllib, requests
 
-# Create your views here.
+# Create your views here. 
+YOUTUBE_API_KEY = 'AIzaSyATDMwCz6N0euSLe-Ipn57Ak1LtI1Wz8cI'
+
 def home(request):
     return render(request, 'corelib/home.html')
 
@@ -15,7 +20,37 @@ def dashboard(request):
 
 def add_video(request, pk):
     form = VideoForm()
-    return render(request, 'corelib/add_video.html',{'form':form})
+    search_form = SearchForm()
+    videolib= VideoLib.objects.get(pk=pk)
+
+    if not videolib.user == request.user:
+        raise Http404
+
+    if request.method == 'POST':
+
+        form = VideoForm(request.POST)
+        if form.is_valid():
+            video= Video()
+            video.videolib= videolib
+            video.url= form.cleaned_data['url']
+            parsed_url = urllib.parse.urlparse(video.url)
+            video_id = urllib.parse.parse_qs(parsed_url.query).get('v')
+            if video_id:
+                 
+                video.youtube_id= video_id[0]
+                response = requests.get(f'https://www.googleapis.com/youtube/v3/videos?part=snippet&id={ video_id[0] }&key={YOUTUBE_API_KEY}')
+                json = response.json()
+                print(json)
+                title = json['items'][0]['snippet']['title']
+                print(title)
+                video.title= title 
+                video.save()
+                return redirect('detail_videolib',pk)
+            else:
+                errors = form._errors.setdefault('url', ErrorList())
+                errors.append('Needs to be a Youtube URL')
+
+    return render(request, 'corelib/add_video.html',{'form':form, 'search_form':search_form, 'videolib':videolib})
 
 
 class SignUp(generic.CreateView):

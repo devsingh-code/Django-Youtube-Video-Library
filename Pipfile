@@ -9,6 +9,8 @@ verify_ssl = true
 django = "*"
 crispy-forms = "*"
 django-crispy-forms = "*"
+django-widget-tweaks = "*"
+requests = "*"
 
 [requires]
 python_version = "3.7"

@@ -2,16 +2,37 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-  <div class="container">
-      <h2 class="pt-4 text-uppercase key_spacing title_font_color">Add Video</h2>
+  
+<div class="mt-5 border container shadow rounded bg-light">
+  <div class="pt-2 pb-2 container">
+      <h2 class="pt-4 text-uppercase key_spacing title_font_color font-weight-bolder">Add Video</h2>
       <hr>
       
         <form action="" method="POST" class="p-2 pt-2 mt-4 font-weight-bold">
+          
             {% csrf_token %}
-            {{form|crispy}}
+            
+            {% load widget_tweaks %}
+
+            {% for field in form  %}
+            <div class="form-group {% if field.errors %} alert alert-danger {% endif %}">
+              {{field.errors}}
+              {{field.label_tag}}
+              {% render_field field class="form-control"%}
+            </div>  
+            
+            {% endfor %}
+            
+          
             <button type="submit" class="btn btn-primary mt-4">Add</button>
         </form>
-      
-   
+        <hr>
+        <h2 class="p-2 text-center font-weight-bold">OR</h2>
+        <form action="" class=" pb-2 font-weight-bold">
+          {% csrf_token %}
+          <p class="p-1">{{search_form | crispy}}</p>
+          
+        </form>
+   </div>
   </div>
 {% endblock content %}
