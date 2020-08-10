@@ -16,7 +16,9 @@ def home(request):
     return render(request, 'corelib/home.html')
 
 def dashboard(request):
-    return render(request,'corelib/dashboard.html')
+    videolibs = VideoLib.objects.filter(user=request.user)
+
+    return render(request,'corelib/dashboard.html',{'videolibs':videolibs})
 
 def add_video(request, pk):
     form = VideoForm()
@@ -114,4 +116,7 @@ class DeleteVideoLib(generic.DeleteView):
     success_url = reverse_lazy('dashboard')
 
 
-
+class DeleteVideo(generic.DeleteView):
+    model = Video
+    template_name = 'corelib/delete_video.html'
+    success_url = reverse_lazy('dashboard')
