@@ -8,6 +8,37 @@
     
      <h5 class="text-muted">{{ videolib.user.username }}</h5>
     <hr>
+
+        
+        {% if user.id == videolib.user.id %}
+        <a href="{% url 'add_video' videolib.id %}" class='btn btn-info text-light font-weight-bold'>Add Video</a>
+        <a href="{% url 'update_videolib' videolib.id %}" class='btn btn-info text-light font-weight-bold'>Edit</a>
+        <a href="{% url 'delete_videolib' videolib.id %}" class='btn btn-danger text-light font-weight-bold'>Delete</a>
+        {% endif %}
+          
+            
+              
+            <div class="row">
+              
+              {% for video in videolib.video_set.all  %}
+              <div class="col-md-4 mt-3">
+                <div class="card h-100  mb-4 shadow rounded bg-light">'
+                    <iframe width=100% height="225" src="https://www.youtube.com/embed/{{video.youtube_id}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class ="card-body d-flex flex-column">
+                        <p class="card-title font-weight-bold">{{ video.title}}</p>
+                        
+                        {% if user.id == videolib.user.id  %}
+                        <a href="{% url 'delete_video' video.id %}" class="btn btn-danger mt-auto"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                        </svg></a>
+                        {% endif %}
+                          
+                    </div>
+                </div>
+            </div>
+              {% endfor %}
+            </div>
+            <hr>
   </div>
 </div>
 {% endblock content %}

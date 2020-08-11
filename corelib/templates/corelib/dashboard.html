@@ -1,20 +1,22 @@
 {% extends 'corelib\base.html' %}
 
 {% block content %}
-  <div class="container">
+  <div class="container ">
     <div class="mt-5 border container">
       <div class="pt-2 pb-2 container">
-         <h2 class="pt-4 text-uppercase key_spacing title_font_color font-weight-bolder text-center">{{ user.username }}'s Video Libraries</h2>
-         
+        
+          <h2 class="pt-4 text-uppercase key_spacing title_font_color font-weight-bolder text-center">{{ user.username }}'s Video Libraries</h2>
+        
         <hr>
-        <div class="row ">
-          <a href="{% url 'create_videolib' %}" class='d-inline float-right btn'><svg width="1.7em" height="1.7em" viewBox="0 0 16 16" class="bi bi-plus-square-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z"/>
-          </svg><h5 class="d-inline ml-2 float-right h5_text_color">New Video Library<h5></a>
+        <div class="row float-right pr-2 ">
+          <a href="{% url 'create_videolib' %}" class='btn btn-warning font-weight-bold'>New Video Library</a>
           </div>
           
             {% for videolib in videolibs  %}
-            <h2 class=" mt-4 h4_text_color text-uppercase font-weight-bold">// {{videolib.title}} //</h2>
+            <a href="{% url 'detail_videolib' videolib.id %}"><h4 class=" p-2 mt-4 h4_text_color text-uppercase font-weight-bold">{{videolib.title}}:</h4></a>
+            <a href="{% url 'add_video' videolib.id %}" class='btn btn-info text-light font-weight-bold'>Add Video</a>
+            <a href="{% url 'update_videolib' videolib.id %}" class='btn btn-info text-light font-weight-bold'>Edit</a>
+            <a href="{% url 'delete_videolib' videolib.id %}" class='btn btn-danger text-light font-weight-bold'>Delete</a>
               <hr>
             <div class="row">
               
@@ -29,6 +31,7 @@
             </div>
               {% endfor %}
             </div>
+            <hr>
             {% endfor %}
           
       </div>

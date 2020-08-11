@@ -93,7 +93,7 @@ class CreateVideoLib(generic.CreateView):
     model = VideoLib
     fields = ['title']
     template_name = 'corelib/create_videolib.html'
-    success_url=reverse_lazy('home')
+    success_url=reverse_lazy('dashboard')
     
     def form_valid(self,form):
         form.instance.user = self.request.user
