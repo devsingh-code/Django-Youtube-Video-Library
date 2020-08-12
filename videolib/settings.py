@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import dj_database_url
+import django_heroku
 # Create your views here. 
 
 YOUTUBE_API_KEY = 'AIzaSyA-TIOs0FoVOlOnZwNHjvBJMhcvUKHOcBM'
@@ -128,3 +129,4 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
 STATIC_FILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+django_heroku.settings(locals())
