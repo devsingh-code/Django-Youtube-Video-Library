@@ -6,6 +6,11 @@
        <hr/>
        <form class="border p-4 font-weight-bold" method="POST">
            {% csrf_token %}
+           
+           {% if form.non_field_errors %}
+             <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+           {% endif %}
+             
            {% load widget_tweaks %}
 
            {% for field in form  %}
@@ -13,6 +18,9 @@
              {{field.errors}}
              {{field.label_tag}}
              {% render_field field class="form-control"%}
+             {% if field.help_text %}
+             <small class="text-muted">{{ field.help_text|safe }}</small>
+           {% endif %}
            </div>  
            
            {% endfor %}

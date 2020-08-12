@@ -2,20 +2,27 @@
 {% load crispy_forms_tags %}
 {% block content %}
   <div class="container mt-5">
-       <h2 class="text-info font-weight-bolder text-uppercase">Login</h2>
+       <h2 class=" text-info font-weight-bolder text-uppercase">Login</h2>
        <hr/>
        <form class="border p-4 font-weight-bold" method="POST">
            {% csrf_token %}
-           {% load widget_tweaks %}
-
-           {% for field in form  %}
-           <div class="form-group {% if field.errors %} alert alert-danger {% endif %}">
-             {{field.errors}}
-             {{field.label_tag}}
-             {% render_field field class="form-control"%}
-           </div>  
+           {% if form.non_field_errors %}
+           <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+         {% endif %}
            
-           {% endfor %}
+         {% load widget_tweaks %}
+
+         {% for field in form  %}
+         <div class="form-group {% if field.errors %} alert alert-danger {% endif %}">
+           {{field.errors}}
+           {{field.label_tag}}
+           {% render_field field class="form-control"%}
+           {% if field.help_text %}
+           <small class="text-muted">{{ field.help_text|safe }}</small>
+         {% endif %}
+         </div>  
+         
+         {% endfor %}
            <p class="pt-3"><button type="submit" class="btn btn-primary font-weight-bold">Login</button></p>
            
        </form>

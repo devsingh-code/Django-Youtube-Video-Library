@@ -1,7 +1,7 @@
 {% extends "corelib\base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-  <div class="container">
+  <div class="mt-5 shadow container">
       <h2 class="pt-4 text-uppercase key_spacing title_font_color font-weight-bolder">Edit Video Library</h2>
       <hr>
     <form action="" method="POST" class="pt-2 mt-4 font-weight-bold">
@@ -18,7 +18,7 @@
         {% endfor %}
         <button type="submit" class=" btn btn-primary mt-4">Save</button>
     </form>
-    <div class="pt-2 inline">
+    <div class="pt-2 pb-4 inline">
         <a href="{% url 'delete_videolib' videolib.id %}" class=" btn btn-danger inline-group">Delete</a>
     </div>
     

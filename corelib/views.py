@@ -8,18 +8,24 @@ from .forms import VideoForm, SearchForm
 from django.http import Http404, JsonResponse
 from  django.forms.utils import ErrorList
 from django.conf import settings
+from django.contrib.auth.decorators import  login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 import urllib, requests
 
 
 
 def home(request):
-    return render(request, 'corelib/home.html')
+    recent_videolibs = VideoLib.objects.all().order_by('-id')[:3]
+    popular_videolibs = [VideoLib.objects.get(pk=1),VideoLib.objects.get(pk=2)]
+    return render(request, 'corelib/home.html',{'recent_videolibs':recent_videolibs,'popular_videolibs':popular_videolibs})
 
+@login_required
 def dashboard(request):
     videolibs = VideoLib.objects.filter(user=request.user)
 
     return render(request,'corelib/dashboard.html',{'videolibs':videolibs})
 
+@login_required
 def add_video(request, pk):
     form = VideoForm()
     search_form = SearchForm()
@@ -54,6 +60,7 @@ def add_video(request, pk):
 
     return render(request, 'corelib/add_video.html',{'form':form, 'search_form':search_form, 'videolib':videolib})
 
+@login_required
 def video_search(request):
     search_form = SearchForm(request.GET)
     if search_form.is_valid():
@@ -64,9 +71,9 @@ def video_search(request):
         return JsonResponse(response.json())
     return JsonResponse({'error':'Not able to validate form'})
 
-class SignUp(generic.CreateView):
+class SignUp( generic.CreateView):
     form_class = UserCreationForm
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('dashboard')
     template_name = 'registration/signup.html'
 
     def form_valid(self,form):
@@ -89,7 +96,7 @@ class SignUp(generic.CreateView):
     #     # return template
 
 #CRUD
-class CreateVideoLib(generic.CreateView):
+class CreateVideoLib(LoginRequiredMixin,generic.CreateView):
     model = VideoLib
     fields = ['title']
     template_name = 'corelib/create_videolib.html'
@@ -104,19 +111,32 @@ class DetailVideoLib(generic.DetailView):
     model = VideoLib
     template_name = 'corelib/detail_videolib.html'
 
-class UpdateVideoLib(generic.UpdateView):
+class UpdateVideoLib(LoginRequiredMixin,generic.UpdateView):
     model = VideoLib
     template_name = 'corelib/update_videolib.html'
     fields = ['title']
     success_url = reverse_lazy('dashboard')
 
-class DeleteVideoLib(generic.DeleteView):
+    def get_object(self):
+        videolib = super(DeleteVideo, self).get_object()
+        if not videolib.user == self.request.user:
+            raise Http404
+        return video
+
+
+class DeleteVideoLib(LoginRequiredMixin,generic.DeleteView):
     model = VideoLib
     template_name = 'corelib/delete_videolib.html'
     success_url = reverse_lazy('dashboard')
 
 
-class DeleteVideo(generic.DeleteView):
+class DeleteVideo(LoginRequiredMixin,generic.DeleteView):
     model = Video
     template_name = 'corelib/delete_video.html'
     success_url = reverse_lazy('dashboard')
+
+    def get_object(self):
+        video = super(DeleteVideo, self).get_object()
+        if not video.videolib.user == self.request.user:
+            raise Http404
+        return video
