@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-
+import dj_database_url
 # Create your views here. 
 
 YOUTUBE_API_KEY = 'AIzaSyA-TIOs0FoVOlOnZwNHjvBJMhcvUKHOcBM'
@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '#!8=tf!nqyfb!qkcg+4+ea*4s2_bh&wi@o36e$66k%t45zo6j&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -56,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'videolib.urls'
@@ -83,10 +84,7 @@ WSGI_APPLICATION = 'videolib.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.config
 }
 
 
@@ -128,3 +126,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
+
+STATIC_FILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
