@@ -7,11 +7,12 @@ verify_ssl = true
 
 [packages]
 django = "*"
-crispy-forms = "*"
 django-crispy-forms = "*"
 django-widget-tweaks = "*"
 requests = "*"
 environ = "*"
+gunicorn = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.7"
