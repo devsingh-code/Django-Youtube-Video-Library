@@ -29,7 +29,7 @@ SECRET_KEY = '#!8=tf!nqyfb!qkcg+4+ea*4s2_bh&wi@o36e$66k%t45zo6j&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['lit-beyond-20267.herokuapp.com']
 
 LOGIN_REDIRECT_URL='home'
 LOGIN_URL='login'
