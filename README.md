@@ -11,19 +11,19 @@ There is option to Login, Signup, Create your video library , add videos to that
 # Landing Page
 
 <p align="center">
-<img src="https://github.com/devsingh-code/Django-Youtube-Video-Library/blob/master/assets/img/Landing_page.jpg">
+<img src="https://github.com/devsingh-code/Django-Youtube-Video-Library/blob/master/assets/Landing_page.jpg">
 </p>
 
 # DashBoard
 
 <p align="center">
-<img src="https://github.com/devsingh-code/Django-Youtube-Video-Library/blob/master/assets/img/Dashboard.jpg">
+<img src="https://github.com/devsingh-code/Django-Youtube-Video-Library/blob/master/assets/Dashboard.jpg">
 </p>
 
 # Add video
 
 <p align="center">
-<img src="https://github.com/devsingh-code/Django-Youtube-Video-Library/blob/master/assets/img/Add_video.jpg">
+<img src="https://github.com/devsingh-code/Django-Youtube-Video-Library/blob/master/assets/Add_video.jpg">
 </p>
 
 <p align="center">
