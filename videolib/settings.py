@@ -30,7 +30,7 @@ SECRET_KEY = '#!8=tf!nqyfb!qkcg+4+ea*4s2_bh&wi@o36e$66k%t45zo6j&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['mountaindiaryfilms.herokuapp.com']
+ALLOWED_HOSTS = ['localhost','mountaindiaryfilms.herokuapp.com']
 
 LOGIN_REDIRECT_URL='home'
 LOGIN_URL='login'
@@ -86,10 +86,7 @@ WSGI_APPLICATION = 'videolib.wsgi.application'
 
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.config()
 }
 
 # Password validation
