@@ -6,7 +6,7 @@ This project is made using HTML, Bootstrap4, AJAX and Vanilla JS as Front-end an
 
 Website is deployed on heroku and is live at <a href="https://mountaindiaryfilms.herokuapp.com/">Django Youtube Video Library</a>
 
-There is option to Login, Signup, Create your video library , add videos to that library. CRUD operations available to add videos using AJAX, where either you can add video using youtube URL or directly dearch and add the video to library from the site.
+There is option to Login, Signup, Create your video library , add videos to that library. CRUD operations available to add videos using AJAX, where either you can add video using youtube URL or directly search and add the video to library from the site.
 
 # Landing Page
 
@@ -17,7 +17,7 @@ There is option to Login, Signup, Create your video library , add videos to that
 # DashBoard
 
 <p align="center">
-<img src="https://github.com/devsingh-code/Django-Youtube-Video-Library/blob/master/assets/img/DashBoard.jpg">
+<img src="https://github.com/devsingh-code/Django-Youtube-Video-Library/blob/master/assets/img/Dashboard.jpg">
 </p>
 
 # Add video
